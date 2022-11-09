@@ -50,3 +50,34 @@ uint8_t TMC2209Stepper::seup()	{ GET_REG(seup);	}
 uint8_t TMC2209Stepper::semax()	{ GET_REG(semax);	}
 uint8_t TMC2209Stepper::sedn()	{ GET_REG(sedn);	}
 bool 	TMC2209Stepper::seimin(){ GET_REG(seimin);	}
+
+
+// COOLCONF
+uint32_t TMC2240Stepper::COOLCONF() { return COOLCONF_register.sr; }
+void TMC2240Stepper::COOLCONF(uint32_t input) {
+	COOLCONF_register.sr = input;
+	write(COOLCONF_register.address, COOLCONF_register.sr);
+}
+
+void TMC2240Stepper::semin(	uint8_t B )	{ SET_REG(semin);	}
+void TMC2240Stepper::seup(	uint8_t B )	{ SET_REG(seup);	}
+void TMC2240Stepper::semax(	uint8_t B )	{ SET_REG(semax);	}
+void TMC2240Stepper::sedn(	uint8_t B )	{ SET_REG(sedn);	}
+void TMC2240Stepper::seimin(bool 	B )	{ SET_REG(seimin);	}
+void TMC2240Stepper::sgt(	int8_t  B )	{ SET_REG(sgt);		}
+void TMC2240Stepper::sfilt(	bool 	B )	{ SET_REG(sfilt);	}
+
+
+uint8_t TMC2240Stepper::semin()	{ GET_REG(semin);	}
+uint8_t TMC2240Stepper::seup()	{ GET_REG(seup);	}
+uint8_t TMC2240Stepper::semax()	{ GET_REG(semax);	}
+uint8_t TMC2240Stepper::sedn()	{ GET_REG(sedn);	}
+bool 	TMC2240Stepper::seimin(){ GET_REG(seimin);	}
+bool 	TMC2240Stepper::sfilt()	{ GET_REG(sfilt);	}
+
+int8_t TMC2240Stepper::sgt() {
+	// Two's complement in a 7bit value
+	int8_t val = (COOLCONF_register.sgt &  0x40) << 1; // Isolate sign bit
+	val |= COOLCONF_register.sgt & 0x7F;
+	return val;
+}
