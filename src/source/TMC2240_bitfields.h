@@ -179,3 +179,161 @@ namespace TMC2240_n {
     };
   };
 };
+
+
+namespace TMC2240_n {
+  struct TSTEP {
+    constexpr static uint8_t address = 0x12;
+    union {
+      uint32_t sr;
+      struct {
+        uint32_t  tstep : 20;
+      };
+    };
+  };
+};
+
+
+
+namespace TMC2240_n {
+  struct TPWMTHRS {
+    constexpr static uint8_t address = 0x13;
+    union {
+      uint32_t sr;
+      struct {
+        uint32_t  tpwmthrs : 20;
+      };
+    };
+  };
+};
+
+
+namespace TMC2240_n {
+  struct TCOOLTHRS {
+    constexpr static uint8_t address = 0x14;
+    union {
+      uint32_t sr;
+      struct {
+        uint32_t  tcoolthrs : 20;
+      };
+    };
+  };
+};
+
+
+namespace TMC2240_n {
+  struct THIGH {
+    constexpr static uint8_t address = 0x15;
+    union {
+      uint32_t sr;
+      struct {
+        uint32_t  thigh : 20;
+      };
+    };
+  };
+};
+
+
+namespace TMC2240_n {
+  struct CHOPCONF_t {
+    constexpr static uint8_t address = 0x6C;
+    union {
+      uint32_t sr;
+      struct {
+        uint8_t toff : 4,
+                hstrt : 3,
+                hend : 4;
+        bool    fd3 : 1,
+                disfdcc : 1,
+                        : 1,
+                chm     : 1;
+        uint8_t TBL    : 2,
+                      : 1;
+        bool     vhighfs : 1,
+                vhighchm : 1;
+        uint8_t tpfd : 4, 
+                mres : 4;
+        bool    intpol : 1, 
+                dedge : 1,
+                diss2g : 1,
+                diss2vs : 1;
+      };
+    };
+  };
+};
+
+
+
+namespace TMC2240_n {
+  struct COOLCONF_t {
+    constexpr static uint8_t address = 0x6D;
+    union {
+      uint16_t sr;
+      struct {
+        uint8_t    semin  : 4;
+        bool              : 1;
+        uint8_t    seup   : 2;
+        bool              : 1;
+        uint8_t    semax  : 4;
+        bool              : 1;
+        uint8_t    sedn   : 2;
+        bool       seimin : 1;
+        int8_t     sgt    : 7,
+                          : 1;
+        bool       sfilt  : 1;
+      };
+    };
+  };
+};
+
+
+
+namespace TMC2240_n {
+  struct PWMCONF_t {
+    constexpr static uint8_t address = 0x70;
+    union {
+      uint32_t sr;
+      struct {
+        uint8_t pwm_ofs : 8,
+                pwm_grad : 8,
+                pwm_freq : 2;
+        bool    pwm_autoscale : 1,
+                pwm_autograd : 1;
+        uint8_t freewheel : 2;
+        bool    pwm_meas_sd_enable : 1,
+                pwm_dis_reg_stst   : 1;
+        uint8_t pwm_reg : 4,
+                pwm_lim : 4;
+      };
+    };
+  };
+
+
+
+  struct PWM_SCALE_t {
+    constexpr static uint8_t address = 0x71;
+    union {
+      uint32_t sr;
+      struct {
+        uint16_t pwm_scale_sum : 10;
+        uint8_t        : 6;
+        int16_t  pwm_scale_auto : 9;
+      };
+    };
+  };
+
+
+  struct PWM_AUTO_t {
+    constexpr static uint8_t address = 0x72;
+    union {
+      uint32_t sr : 24;
+      struct {
+        uint8_t pwm_ofs_auto : 8,
+                            : 8,
+                pwm_grad_auto : 8;
+      };
+    };
+  };
+}
+
+#pragma pack(pop)
